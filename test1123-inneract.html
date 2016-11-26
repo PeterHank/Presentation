@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset = "utf-8">
+	<script src = "echarts.js"></script>
+</head>	
+<body>
+	<div id = "main" style = "height: 600px;width = 600px"></div>
+	<script type = "text/javascript">
+var dom = document.getElementById('main');
+var mychart = echarts.init(dom);
+var app = {};
+option = null;
+
+var data1 = [];
+var data2 = [];
+var data3 = [];
+
+var random = function(max){
+	return (Math.random()*max).toFixed(3);
+}
+
+for (var i = 0; i < 100; i++){
+	data1.push([random(10),random(10),random(1)]);
+	data2.push([random(5),random(5),random(1)]);
+	data3.push([random(2),random(2),random(1)]);
+}
+
+option = {
+	animation:false,
+	legend:{
+		data: ['Big','Mid','Small']
+	},
+	tooltip:{
+	},
+	xAxis:{
+		type : 'value',
+		min : 'dataMin',
+		max : 'dataMax',
+		splitLine:{
+			show:true
+		}
+	},
+	yAxis:{
+		type : "value",
+		min : "dataMin",
+		max : "dataMax",
+		splitLine:{
+			show:true
+		}
+	},
+	dataZoom:[
+		{
+			type:'slider',
+			show:'true',
+			xAxisIndex:[0],
+			start :1,
+			end:35,
+		},
+				{
+			type:'slider',
+			show:'true',
+			yAxisIndex:[0],
+			start :1,
+			end:35,
+		},
+				{
+			type:'inside',
+			show:'true',
+			xAxisIndex:[0],
+			start :1,
+			end:35,
+		},
+				{
+			type:'inside',
+			show:'true',
+			yAxisIndex:[0],
+			start :1,
+			end:35,
+		},
+		
+	],
+	series:[
+		{
+			name: 'Big',
+			type: 'scatter',
+			itemStyle:{
+				normal:{
+					opacity:0.8
+				}
+			},
+			symbolSize:function(val){
+				return val[2]*40;
+			},
+			data:data1
+		},
+				{
+			name: 'Mid',
+			type: 'scatter',
+			itemStyle:{
+				normal:{
+					opacity:0.8
+				}
+			},
+			symbolSize:function(val){
+				return val[2]*40;
+			},
+			data:data2
+		},
+				{
+			name: 'Small',
+			type: 'scatter',
+			itemStyle:{
+				normal:{
+					opacity:0.8
+				}
+			},
+			symbolSize:function(val){
+				return val[2]*40;
+			},
+			data:data3
+		},
+		
+	]
+}
+if (option && typeof option === "object"){
+	mychart.setOption(option,true);
+}
+	
+	</script>	
+</body>
+</head>
+</html>
